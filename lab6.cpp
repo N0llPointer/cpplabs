@@ -180,7 +180,7 @@ public:
 		cout << "}";
 	}
 
-	void sort(double* arr) {
+	void sort(double* arr) { // Сортировка массива пузырьком O(n^2) - максимум
 		for (int i = 0; i < count - 1; i++) {
 			for (int j = 0; j < count - i - 1; j++) {
 				if (arr[j] > arr[j + 1]) {
@@ -194,7 +194,7 @@ public:
 	}
 
 	//добавление в конец нового значения
-	void AddValue(double value)
+	void AddValue(double value) // Добавление файла. Сначала добавляется файл в конец массива, потом сортируется. О(n^2) - максимум
 	{
 		if (count < capacity)
 		{
@@ -207,7 +207,7 @@ public:
 		//что делаем, если массив заполнен?
 	}
 
-	int indexOf(double value) {
+	int indexOf(double value) { // Нахождение индекса заданного файла через линейный поиск. О(n)  - максимум
 
 		for (int i = 0; i < count; i++){
 			if (value == ptr[i])
@@ -216,7 +216,7 @@ public:
 		return -1;
 	}
 
-	double quantile(double prob) {
+	double quantile(double prob) { // Подсчет квантиля для заданной вероятности, О(1)  - максимум
 		int index = ceil(count * prob);
 		return index;
 	}
