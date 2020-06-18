@@ -393,7 +393,7 @@ public:
 		return end;
 	}
 
-	virtual double pop() {
+	virtual double pop() {  // Получает значение последнего элемента и удаляет сам элемент
 		double value = end->getValue();
 		remove(end);
 		return value;
@@ -427,16 +427,16 @@ public:
 			Element* next = current->getNext();
 			Element* previous = current->getPrevious();
 			
-			if (num == 1) {
+			if (num == 1) { // Если элемент 1 - он же конец и начало
 				begin = end = NULL;
-			}else if (current == end) {
+			}else if (current == end) { // Если удаляется последний элемент
 				end = previous;
 				previous->setNext(NULL);
-			} else if (current == begin) {
+			} else if (current == begin) { // Если удаляется первый элемент
 				begin = next;
 				previous->setPrevious(NULL);
 			}
-			else {
+			else { // в любом другом случае
 				next->setPrevious(previous);
 				previous->setNext(next);
 			}
@@ -448,7 +448,7 @@ public:
 		}
 	}
 
-	virtual Element* find(double value_to_find)
+	virtual Element* find(double value_to_find) // Обычный линейный поиск
 	{
 
 		//поиск в списке. value_to_find - значение, которое мы сравниваем при поиске с полем find в элементе списка
@@ -467,15 +467,15 @@ public:
 		return NULL;
 	}
 
-	void split(Element* delimetr, DoubleSidedLinkedList& list1, DoubleSidedLinkedList& list2) {
+	void split(Element* delimetr, DoubleSidedLinkedList& list1, DoubleSidedLinkedList& list2) { 
 		Element* element = begin;
 
-		while (element != delimetr) {
+		while (element != delimetr) { // Первый лист заполняется до разделителя
 			list1.push(element->getValue());
 			element = element->getNext();
 		}
 		
-		list2.push(element->getValue());
+		list2.push(element->getValue()); // Втоорй лист заполняется разделителем и всеми следующими элементами
 
 		while (element != NULL) {
 			list2.push(element->getValue());
@@ -486,7 +486,7 @@ public:
 
 };
 
-DoubleSidedLinkedList* merge(DoubleSidedLinkedList& list1, DoubleSidedLinkedList& list2) {
+DoubleSidedLinkedList* merge(DoubleSidedLinkedList& list1, DoubleSidedLinkedList& list2) { // Объединение 2 листов в 3
 
 	DoubleSidedLinkedList list(list1);
 
