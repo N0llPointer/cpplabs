@@ -355,6 +355,72 @@ public:
 	}
 };
 
+class DoubleSidedLinkedList : public LinkedListChild
+{
+protected:
+	//указатель на конец списка
+	Element* end;
+public:
+	DoubleSidedLinkedList() : LinkedListChild() { cout << "\nDoubleSidedLinkedList constructor"; end = NULL; }
+	~DoubleSidedLinkedList() { cout << "\nDoubleSidedLinkedList destructor"; }
+
+	virtual Element* getEnd() { return end; }
+
+	virtual Element* push(double value)
+	{
+		//O(n)
+
+		Element* added_element = new Element;
+
+		added_element->setValue(value);
+
+		if (end != NULL)
+		{
+			//O(1)
+			//Element* added_element = LinkedListChild::insert(end, value);
+			//много элементов
+			end->setNext(added_element);
+			added_element->setPrevious(end);
+			end = added_element;
+		}
+		else
+		{
+			begin = added_element;
+			//добавляем первый элемент
+			end = added_element;
+		}
+		return end;
+	}
+
+	virtual Element* insert(Element* current, double value)
+	{
+		Element* newElm = LinkedListChild::insert(current, value);
+
+		newElm->setPrevious(current);
+
+		return newElm;
+	}
+
+	void remove(Element* current)
+	{
+		//удаление элемента
+		if (current != NULL)
+		{
+			Element* nextElm = current->getNext();
+			Element* prevElm = current->getPrevious();
+			LinkedListChild::remove(current);
+			if (nextElm != NULL)
+				nextElm->setPrevious(prevElm);
+		}
+	}
+
+	virtual Element* find(double value_to_find)
+	{
+		return LinkedListChild::find(value_to_find);
+	}
+
+};
+
 int main()
 {
 	LinkedListChild list;
