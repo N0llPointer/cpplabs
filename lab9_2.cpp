@@ -317,21 +317,7 @@ public:
 
 	virtual Element* find(double value_to_find)
 	{
-
-		//поиск в списке. value_to_find - значение, которое мы сравниваем при поиске с полем find в элементе списка
-		//если нашли, - возвращаем указатель на элемент списка
-
-		//1.  список закончился current==NULL
-		//2.  current->getValue() == value_to_find
-		Element* current = begin;
-		while (current != NULL)
-		{
-			//нашли элемент
-			if (current->getValue() == value_to_find)
-				return current;
-			current = current->getNext();
-		}
-		return NULL;
+		return LinkedListChild::find(value_to_find);
 	}
 
 	LinkedListChild& operator=(const LinkedListChild& list)
